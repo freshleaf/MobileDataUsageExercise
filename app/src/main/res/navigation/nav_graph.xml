@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/volumeListFragment">
+
+    <fragment
+        android:id="@+id/volumeListFragment"
+        android:name="com.yuman.anotherexercise.volumelist.VolumeListFragment"
+        android:label="fragment_volume_list"
+        tools:layout="@layout/fragment_volume_list" >
+        <action
+            android:id="@+id/action_volumeListFragment_to_volumeDetailsFragment"
+            app:destination="@id/volumeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/volumeDetailsFragment"
+        android:name="com.yuman.anotherexercise.volumedetails.VolumeDetailsFragment"
+        android:label="fragment_volume_details"
+        tools:layout="@layout/fragment_volume_details" />
+</navigation>
