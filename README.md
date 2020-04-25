@@ -18,8 +18,6 @@ Android exercise, fetch open API data and show it in list and detail pages.
 It will be two pages app, list and detail screen.   
 List page can switch style between normal and card style.
 
-When the basic function is done, it's possible to add function: detail page scroll by viewpager2, persistent storage by room etc 
-
 some components will be:
 
 * Controller
@@ -32,4 +30,13 @@ some components will be:
 * Test
 
 ## Progress Trace
-TBD
+App works with basic function.
+
+TO-DO list:
+
+* add test code
+* add function: persistent storage using Room
+* refine network API definition
+* add function: detail page scroll using viewpager2
+
+
