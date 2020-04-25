@@ -3,6 +3,10 @@ package com.yuman.anotherexercise.data
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * data class of year data usage volume
+ * It contains 4 quarters volume and total volume
+ */
 @Parcelize
 data class YearVolumeItem(
     var year: Int,

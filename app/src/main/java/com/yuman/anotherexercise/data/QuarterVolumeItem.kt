@@ -5,6 +5,9 @@ import android.util.Log
 import com.yuman.anotherexercise.util.LOG_TAG
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * data class of quarter data usage volume
+ */
 @Parcelize
 data class QuarterVolumeItem(
     var year: Int = 0,

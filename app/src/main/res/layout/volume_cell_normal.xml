@@ -61,50 +61,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:text="@string/label_short_quarter_1"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvQ2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvYear"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="Q1" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvQ2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/label_short_quarter_2"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvQ1"
         app:layout_constraintEnd_toStartOf="@+id/tvQ3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvQ1"
-        app:layout_constraintTop_toTopOf="@+id/tvQ1"
-        tools:text="Q2" />
+        app:layout_constraintTop_toTopOf="@+id/tvQ1" />
 
     <TextView
         android:id="@+id/tvQ3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/label_short_quarter_3"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvQ2"
         app:layout_constraintEnd_toStartOf="@+id/tvQ4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvQ2"
-        app:layout_constraintTop_toTopOf="@+id/tvQ2"
-        tools:text="Q3" />
+        app:layout_constraintTop_toTopOf="@+id/tvQ2" />
 
     <TextView
         android:id="@+id/tvQ4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
+        android:text="@string/label_short_quarter_4"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvQ3"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toEndOf="@+id/tvQ3"
-        app:layout_constraintTop_toTopOf="@+id/tvQ3"
-        tools:text="Q4" />
+        app:layout_constraintTop_toTopOf="@+id/tvQ3" />
 
     <ImageView
         android:id="@+id/ivDown"

@@ -15,4 +15,10 @@
     <string name="label_quarter_2">Quarter 2:</string>
     <string name="label_quarter_3">Quarter 3:</string>
     <string name="label_quarter_4">Quarter 4:</string>
+    <string name="label_short_quarter_1">Q1</string>
+    <string name="label_short_quarter_2">Q2</string>
+    <string name="label_short_quarter_3">Q3</string>
+    <string name="label_short_quarter_4">Q4</string>
+    <string name="msg_fetch_data_failed">Fetch failed</string>
+    <string name="menuitem_swipe">Swipe to Refresh</string>
 </resources>

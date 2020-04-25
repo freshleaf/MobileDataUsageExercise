@@ -13,18 +13,18 @@ import com.yuman.anotherexercise.util.VOLUME_ITEM_KEY
 import java.text.NumberFormat
 
 /**
- * A simple [Fragment] subclass.
+ * the "details screen", show 4 quarters volume also
  */
 class VolumeDetailsFragment : Fragment() {
 
-    lateinit var volumeData: YearVolumeItem
+    private lateinit var volumeData: YearVolumeItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         volumeData =
-            arguments?.getParcelable<YearVolumeItem>(VOLUME_ITEM_KEY) ?: YearVolumeItem(2000)
+            arguments?.getParcelable(VOLUME_ITEM_KEY) ?: YearVolumeItem(2000)
         val binding = DataBindingUtil.inflate<FragmentVolumeDetailsBinding>(
             inflater,
             R.layout.fragment_volume_details,

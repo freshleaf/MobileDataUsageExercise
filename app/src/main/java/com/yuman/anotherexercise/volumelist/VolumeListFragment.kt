@@ -1,18 +1,21 @@
 package com.yuman.anotherexercise.volumelist
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.yuman.anotherexercise.R
+import com.yuman.anotherexercise.util.FetchDataStatus
 import kotlinx.android.synthetic.main.fragment_volume_list.*
 import kotlinx.android.synthetic.main.switch_item.view.*
 
 /**
- * A simple [Fragment] subclass.
+ * the "list screen", show list of every year data usage volume
+ * support normal list and card list
  */
 class VolumeListFragment : Fragment() {
     private val volumeListViewModel by activityViewModels<VolumeListViewModel>()
@@ -48,9 +51,9 @@ class VolumeListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.tempMenuItem -> {
-                // TODO change to real menu action
-                findNavController().navigate(R.id.action_volumeListFragment_to_volumeDetailsFragment)
+            R.id.menu_item_swipe -> {
+                swipeLayout.isRefreshing = true
+                Handler().postDelayed({ volumeListViewModel.resetQuery() }, 1000)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -63,6 +66,18 @@ class VolumeListFragment : Fragment() {
         volumeListViewModel.volumeList.observe(viewLifecycleOwner, Observer {
             volumeListAdapter.submitList(it)
             volumeListAdapterCard.submitList(it)
+            swipeLayout.isRefreshing = false
+        })
+        volumeListViewModel.fetchDataUsageResponse.observe(viewLifecycleOwner, Observer {
+            if (it == FetchDataStatus.NETWORK_ERROR) {
+                swipeLayout.isRefreshing = false
+                Snackbar.make(
+                    requireActivity().volumeListFragmentView,
+                    getString(R.string.msg_fetch_data_failed),
+                    Snackbar.LENGTH_LONG
+                ).setAction(R.string.button_ok) {}
+                    .show()
+            }
         })
 
         recycleView.apply {
@@ -75,7 +90,15 @@ class VolumeListFragment : Fragment() {
         }
 
         volumeListViewModel.volumeList.value.isNullOrEmpty().let {
-            volumeListViewModel.fetchData()
+            // to make the progressbar visible
+            Handler().post {
+                swipeLayout.isRefreshing = true
+                volumeListViewModel.resetQuery()
+            }
+        }
+
+        swipeLayout.setOnRefreshListener {
+            volumeListViewModel.resetQuery()
         }
     }
 

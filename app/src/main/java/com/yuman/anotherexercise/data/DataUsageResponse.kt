@@ -2,7 +2,10 @@ package com.yuman.anotherexercise.data
 
 import com.google.gson.annotations.SerializedName
 
-data class NetworkResponse(
+/**
+ * Network response serialize class
+ */
+data class DataUsageResponse(
     @SerializedName("success") val isSuccess: Boolean,
     val result: ResultContent
 )
