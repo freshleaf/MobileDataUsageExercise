@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">AnotherExercise</string>
     <string name="button_ok">OK</string>
-    <string name="dropdown_alert_title">Usage dropdown</string>
-    <string name="msg_volume_dropdown">The mobile data usage volume of one or more quarters are dropdown.</string>
+    <string name="dropdown_alert_title">Usage Dropdown</string>
+    <string name="msg_volume_dropdown">One or more quarters mobile data usage volume, are less than the quarter before it.</string>
     <string name="petabytes_name">Petabytes</string>
     <string name="iv_dropdown_content_desc">volume dropdown</string>
     <string name="screen_title_volume_list">Volume List</string>
     <string name="screen_title_volume_details">Volume of Year</string>
     <string name="menuitem_switch">Switch</string>
+    <string name="petabytes_descriptino">in Petabytes, 1 Petabytes = 2^50 bytes ≈ 1.1 x 10^15 bytes</string>
+    <string name="label_year">Year:</string>
+    <string name="label_volume">Volume:</string>
+    <string name="label_quarter_1">Quarter 1:</string>
+    <string name="label_quarter_2">Quarter 2:</string>
+    <string name="label_quarter_3">Quarter 3:</string>
+    <string name="label_quarter_4">Quarter 4:</string>
 </resources>

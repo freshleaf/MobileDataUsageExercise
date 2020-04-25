@@ -17,10 +17,12 @@ import kotlinx.android.synthetic.main.switch_item.view.*
 class VolumeListFragment : Fragment() {
     private val volumeListViewModel by activityViewModels<VolumeListViewModel>()
     private lateinit var switchMenuItem: MenuItem
-    private val volumeListAdapter = VolumeListAdatper()
+    private val volumeListAdapter = VolumeListAdatper(false)
+    private val volumeListAdapterCard = VolumeListAdatper(true)
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_volume_list, container, false)
@@ -31,9 +33,17 @@ class VolumeListFragment : Fragment() {
         inflater.inflate(R.menu.main_menu, menu)
 
         switchMenuItem = menu.findItem(R.id.app_bar_switch)
-        switchMenuItem.actionView.switchCardView.setOnCheckedChangeListener { _, _ ->
-            // TODO add switch card view function
+        switchMenuItem.actionView.switchCardView.setOnCheckedChangeListener { _, b: Boolean ->
+            if (b) {
+                recycleView.adapter = volumeListAdapterCard
+                volumeListViewModel.isCardView = true
+            } else {
+                recycleView.adapter = volumeListAdapter
+                volumeListViewModel.isCardView = false
+            }
+            volumeListViewModel.storeIsCardView(b)
         }
+        switchMenuItem.actionView.switchCardView.isChecked = volumeListViewModel.isCardView
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -52,10 +62,15 @@ class VolumeListFragment : Fragment() {
 
         volumeListViewModel.volumeList.observe(viewLifecycleOwner, Observer {
             volumeListAdapter.submitList(it)
+            volumeListAdapterCard.submitList(it)
         })
 
         recycleView.apply {
-            adapter = volumeListAdapter
+            adapter = if (volumeListViewModel.isCardView) {
+                volumeListAdapterCard
+            } else {
+                volumeListAdapter
+            }
             layoutManager = LinearLayoutManager(requireContext())
         }
 

@@ -1,23 +1,27 @@
 package com.yuman.anotherexercise.volumelist
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yuman.anotherexercise.R
 import com.yuman.anotherexercise.data.YearVolumeItem
+import com.yuman.anotherexercise.util.VOLUME_ITEM_KEY
 import kotlinx.android.synthetic.main.volume_cell_normal.view.*
 import java.text.NumberFormat
 
-class VolumeListAdatper :
+class VolumeListAdatper (useCard: Boolean):
     ListAdapter<YearVolumeItem, VolumeListAdatper.VolumeListViewHolder>(DIFFCALLBACK) {
 
+    private var isCardView: Boolean = useCard
     private val nf = NumberFormat.getInstance().apply {
         this.maximumFractionDigits = 6
         this.isGroupingUsed = false
@@ -25,13 +29,24 @@ class VolumeListAdatper :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VolumeListViewHolder {
         val viewHolder = VolumeListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.volume_cell_normal, parent, false)
+            if (isCardView) {
+                LayoutInflater.from(parent.context).inflate(R.layout.volume_cell_card, parent, false)
+            } else {
+                LayoutInflater.from(parent.context).inflate(R.layout.volume_cell_normal, parent, false)
+            }
         )
         viewHolder.ivDown.setOnClickListener {
             AlertDialog.Builder(parent.context).also {
                 it.setTitle(R.string.dropdown_alert_title).setMessage(R.string.msg_volume_dropdown)
                 it.setPositiveButton(R.string.button_ok) { _, _ -> }
                 it.create().show()
+            }
+        }
+        viewHolder.itemView.setOnClickListener {
+            Bundle().apply {
+                putParcelable(VOLUME_ITEM_KEY, getItem(viewHolder.adapterPosition))
+                viewHolder.itemView.findNavController()
+                    .navigate(R.id.action_volumeListFragment_to_volumeDetailsFragment, this)
             }
         }
         return viewHolder
