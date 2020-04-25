@@ -89,7 +89,7 @@ class VolumeListFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        volumeListViewModel.volumeList.value.isNullOrEmpty().let {
+        if (volumeListViewModel.volumeList.value.isNullOrEmpty()) {
             // to make the progressbar visible
             Handler().post {
                 swipeLayout.isRefreshing = true
