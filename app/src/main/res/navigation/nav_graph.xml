@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/volumeListFragment"
         android:name="com.yuman.anotherexercise.volumelist.VolumeListFragment"
-        android:label="fragment_volume_list"
-        tools:layout="@layout/fragment_volume_list" >
+        android:label="@string/screen_title_volume_list"
+        tools:layout="@layout/fragment_volume_list">
         <action
             android:id="@+id/action_volumeListFragment_to_volumeDetailsFragment"
             app:destination="@id/volumeDetailsFragment" />
@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/volumeDetailsFragment"
         android:name="com.yuman.anotherexercise.volumedetails.VolumeDetailsFragment"
-        android:label="fragment_volume_details"
+        android:label="@string/screen_title_volume_details"
         tools:layout="@layout/fragment_volume_details" />
 </navigation>
