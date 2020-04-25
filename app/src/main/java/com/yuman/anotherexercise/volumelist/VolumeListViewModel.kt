@@ -5,18 +5,29 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.yuman.anotherexercise.data.QuarterVolumeItem
 import com.yuman.anotherexercise.data.YearVolumeItem
 import com.yuman.anotherexercise.util.SHP_KEY_IS_CARD_VIEW
 import com.yuman.anotherexercise.util.SHP_STORE_NAME
+import com.yuman.anotherexercise.util.VOLUME_LIST_KEY
 
-class VolumeListViewModel(application: Application) : AndroidViewModel(application) {
+class VolumeListViewModel(
+    application: Application,
+    private val savedStateHandle: SavedStateHandle
+) :
+    AndroidViewModel(application) {
 
     // list screen card view or normal list view
     var isCardView: Boolean = false
 
     // contain list screen data
-    private val mVolumeList = MutableLiveData<List<YearVolumeItem>>()
+    private val mVolumeList = MutableLiveData<List<YearVolumeItem>>().also {
+        if (!savedStateHandle.contains(VOLUME_LIST_KEY)) {
+            savedStateHandle.set(VOLUME_LIST_KEY, ArrayList<YearVolumeItem>())
+        }
+        it.value = savedStateHandle.get(VOLUME_LIST_KEY)
+    }
     val volumeList: LiveData<List<YearVolumeItem>>
         get() = mVolumeList
 
@@ -43,12 +54,13 @@ class VolumeListViewModel(application: Application) : AndroidViewModel(applicati
                 temp.isDropdown = true
             }
             for (quarter in 1..4) {
-                val tempQuarter = QuarterVolumeItem(2000 + year, quarter,1.321654f)
-                if (quarter%2 == 0) tempQuarter.isDropdown = true
+                val tempQuarter = QuarterVolumeItem(2000 + year, quarter, 1.321654f)
+                if (quarter % 2 == 0) tempQuarter.isDropdown = true
                 temp.addQuarterVolume(tempQuarter)
             }
             tempList.add(temp)
         }
+        savedStateHandle.set(VOLUME_LIST_KEY, mVolumeList.value)
         mVolumeList.value = tempList
     }
 
