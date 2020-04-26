@@ -16,6 +16,7 @@ data class YearVolumeItem(
 ) : Parcelable {
 
     companion object {
+
         fun getYearVolumeItemListFromRaw(quarterContentList: ArrayList<QuarterContent>): ArrayList<YearVolumeItem> {
             val quarterVolumeItemList = ArrayList<QuarterVolumeItem>()
             quarterContentList.forEach {
@@ -30,6 +31,7 @@ data class YearVolumeItem(
             var minYear = Int.MAX_VALUE
             var maxYear = 0
             for (item in quarterVolumeItemList) {
+                if (item.year == 0) continue
                 if (item.year < minYear) {
                     minYear = item.year
                 }
@@ -49,9 +51,7 @@ data class YearVolumeItem(
                 if (map.containsKey(i)) {
                     val temp = map[i]!!
                     result.add(temp)
-                    if (map.containsKey(i - 1)) {
-                        temp.checkDropdown(map[i - 1])
-                    }
+                    temp.checkDropdown(map[i - 1])
                 }
             }
             return result
@@ -74,9 +74,13 @@ data class YearVolumeItem(
         quarterItems[quarter - 1] = quarterVolumeItem
     }
 
-    fun checkDropdown(lastYear: YearVolumeItem?): Boolean {
+    // check whether the year contains dropdown quarter
+    // not only compare within this year, also will compare last year Q4
+    fun checkDropdown(lastYear: YearVolumeItem?) {
         val volumeArray = floatArrayOf(0f, 0f, 0f, 0f, 0f)
-        volumeArray[0] = lastYear?.quarterItems?.get(3)?.volume!!
+        if (lastYear?.quarterItems?.get(3) != null) {
+            volumeArray[0] = lastYear.quarterItems[3]?.volume!!
+        }
         volumeArray[1] = this.quarterItems[0]?.volume ?: 0.0f
         volumeArray[2] = this.quarterItems[1]?.volume ?: 0.0f
         volumeArray[3] = this.quarterItems[2]?.volume ?: 0.0f
@@ -87,7 +91,6 @@ data class YearVolumeItem(
                 this.isDropdown = true
             }
         }
-        return true
     }
 
     override fun equals(other: Any?): Boolean {

@@ -1,8 +1,6 @@
 package com.yuman.anotherexercise.data
 
 import android.os.Parcelable
-import android.util.Log
-import com.yuman.anotherexercise.util.LOG_TAG
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -15,14 +13,28 @@ data class QuarterVolumeItem(
     var volume: Float = 0.0f,
     var isDropdown: Boolean = false
 ) : Parcelable {
+    /**
+     * convert [QuarterContent] to [QuarterVolumeItem]
+     * convert server response to data object, which is used in view model
+     */
     constructor(quarterContent: QuarterContent) : this() {
         val temp = quarterContent.quarterStr.split("-Q")
         if (temp.size != 2) {
-            Log.e(LOG_TAG, "parse error: $quarterContent")
             return
         }
-        year = temp[0].toInt()
-        quarter = temp[1].toInt()
+        try {
+            year = temp[0].toInt()
+            quarter = temp[1].toInt()
+            if (quarter < 1 || quarter > 4) {
+                year = 0
+                quarter = 0
+                return
+            }
+        } catch (e: NumberFormatException) {
+            year = 0
+            quarter = 0
+            return
+        }
         volume = quarterContent.volumeInPb
     }
 }
