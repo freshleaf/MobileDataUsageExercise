@@ -1,4 +1,4 @@
-package com.yuman.anotherexercise.data
+package com.yuman.anotherexercise.data.remote
 
 import com.google.gson.annotations.SerializedName
 

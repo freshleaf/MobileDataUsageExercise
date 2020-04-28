@@ -1,6 +1,7 @@
 package com.yuman.anotherexercise.data
 
 import android.os.Parcelable
+import com.yuman.anotherexercise.data.remote.QuarterContent
 import kotlinx.android.parcel.Parcelize
 
 /**

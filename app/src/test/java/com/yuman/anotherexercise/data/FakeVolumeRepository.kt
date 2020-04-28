@@ -1,6 +1,9 @@
 package com.yuman.anotherexercise.data
 
 import com.android.volley.VolleyError
+import com.yuman.anotherexercise.data.remote.DataUsageResponse
+import com.yuman.anotherexercise.data.remote.QuarterContent
+import com.yuman.anotherexercise.data.remote.ResultContent
 
 class FakeVolumeRepository : IVolumeRepository {
 

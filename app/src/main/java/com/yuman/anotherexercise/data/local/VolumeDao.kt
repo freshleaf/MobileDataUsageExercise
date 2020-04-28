@@ -1,12 +1,9 @@
 package com.yuman.anotherexercise.data.local
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.yuman.anotherexercise.data.QuarterContent
 import com.yuman.anotherexercise.data.QuarterVolumeItem
 
 @Dao

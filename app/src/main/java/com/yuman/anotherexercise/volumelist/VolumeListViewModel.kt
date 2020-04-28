@@ -3,7 +3,7 @@ package com.yuman.anotherexercise.volumelist
 import android.util.Log
 import androidx.lifecycle.*
 import com.android.volley.VolleyError
-import com.yuman.anotherexercise.data.DataUsageResponse
+import com.yuman.anotherexercise.data.remote.DataUsageResponse
 import com.yuman.anotherexercise.data.IVolumeRepository
 import com.yuman.anotherexercise.data.QuarterVolumeItem
 import com.yuman.anotherexercise.data.YearVolumeItem

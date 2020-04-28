@@ -1,6 +1,7 @@
 package com.yuman.anotherexercise.data
 
 import com.android.volley.VolleyError
+import com.yuman.anotherexercise.data.remote.DataUsageResponse
 
 interface IVolumeRepository {
 

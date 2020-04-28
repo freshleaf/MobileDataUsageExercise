@@ -1,6 +1,7 @@
 package com.yuman.anotherexercise.data
 
 import com.google.common.truth.Truth.assertThat
+import com.yuman.anotherexercise.data.remote.QuarterContent
 import org.junit.Test
 
 class YearVolumeItemTest {

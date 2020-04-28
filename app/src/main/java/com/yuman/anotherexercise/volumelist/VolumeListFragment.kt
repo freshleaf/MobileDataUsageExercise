@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.yuman.anotherexercise.R
 import com.yuman.anotherexercise.data.VolumeRepository
+import com.yuman.anotherexercise.data.local.VolumeDatabase
+import com.yuman.anotherexercise.data.remote.RemoteDataSource
 import com.yuman.anotherexercise.util.FetchDataStatus
 import kotlinx.android.synthetic.main.fragment_volume_list.*
 import kotlinx.android.synthetic.main.switch_item.view.*
@@ -20,7 +22,14 @@ import kotlinx.android.synthetic.main.switch_item.view.*
  */
 class VolumeListFragment : Fragment() {
     private val volumeListViewModel by viewModels<VolumeListViewModel> {
-        VolumeViewModelFactory(VolumeRepository.getInstance(requireActivity().application))
+        val application = requireActivity().application
+        VolumeViewModelFactory(
+            VolumeRepository(
+                application,
+                VolumeDatabase.getInstance(application).volumeDao(),
+                RemoteDataSource(application)
+            )
+        )
     }
 
     private lateinit var switchMenuItem: MenuItem
@@ -96,11 +105,8 @@ class VolumeListFragment : Fragment() {
         }
 
         if (volumeListViewModel.volumeList.value.isNullOrEmpty()) {
-            // to make the progressbar visible
-            Handler().post {
-                swipeLayout.isRefreshing = true
-                volumeListViewModel.resetQuery()
-            }
+            swipeLayout.isRefreshing = true
+            volumeListViewModel.resetQuery()
         }
 
         swipeLayout.setOnRefreshListener {

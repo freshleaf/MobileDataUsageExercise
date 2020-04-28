@@ -1,13 +1,19 @@
 package com.yuman.anotherexercise.data
 
 import com.google.common.truth.Truth.assertThat
+import com.yuman.anotherexercise.data.remote.QuarterContent
 import org.junit.Test
 
 class QuarterVolumeItemTest {
 
     @Test
     fun constructor_quarter_returnQuarter() {
-        val quarterContent = QuarterContent(1, "2009-Q1", 1.066517f)
+        val quarterContent =
+            QuarterContent(
+                1,
+                "2009-Q1",
+                1.066517f
+            )
 
         val quarterVolumeItem = QuarterVolumeItem(quarterContent)
 
@@ -18,7 +24,12 @@ class QuarterVolumeItemTest {
 
     @Test
     fun constructor_empty_returnZero() {
-        val quarterContent = QuarterContent(12, "", 1.066517f)
+        val quarterContent =
+            QuarterContent(
+                12,
+                "",
+                1.066517f
+            )
 
         val quarterVolumeItem = QuarterVolumeItem(quarterContent)
 
@@ -29,8 +40,18 @@ class QuarterVolumeItemTest {
 
     @Test
     fun constructor_invalidQuarter_returnZero() {
-        val quarterContent = QuarterContent(12, "2009-QA", 1.066517f)
-        val quarterContent2 = QuarterContent(12, "2009-Q6", 1.066517f)
+        val quarterContent =
+            QuarterContent(
+                12,
+                "2009-QA",
+                1.066517f
+            )
+        val quarterContent2 =
+            QuarterContent(
+                12,
+                "2009-Q6",
+                1.066517f
+            )
 
         val quarterVolumeItem = QuarterVolumeItem(quarterContent)
         val quarterVolumeItem2 = QuarterVolumeItem(quarterContent2)
@@ -45,7 +66,12 @@ class QuarterVolumeItemTest {
 
     @Test
     fun constructor_invalidYear_returnZero() {
-        val quarterContent = QuarterContent(12, "A-Q1", 1.066517f)
+        val quarterContent =
+            QuarterContent(
+                12,
+                "A-Q1",
+                1.066517f
+            )
 
         val quarterVolumeItem = QuarterVolumeItem(quarterContent)
 

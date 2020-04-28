@@ -4,7 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
-import com.yuman.anotherexercise.data.*
+import com.yuman.anotherexercise.data.FakeVolumeRepository
+import com.yuman.anotherexercise.data.QuarterVolumeItem
+import com.yuman.anotherexercise.data.YearVolumeItem
+import com.yuman.anotherexercise.data.remote.DataUsageResponse
+import com.yuman.anotherexercise.data.remote.QuarterContent
+import com.yuman.anotherexercise.data.remote.ResultContent
 import com.yuman.anotherexercise.util.FetchDataStatus
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
@@ -41,9 +46,6 @@ class VolumeListViewModelTest {
         val year2006Q3 = QuarterContent(9, "2006-Q3", 0.001735f)
 
         records = ArrayList<QuarterContent>()
-        val resultContent = ResultContent(0, 0, 0, records)
-        dataUsageResponse = DataUsageResponse(true, resultContent)
-
         records.let {
             it.add(year2004Q3)
             it.add(year2004Q4)
@@ -55,9 +57,9 @@ class VolumeListViewModelTest {
             it.add(year2006Q2)
             it.add(year2006Q3)
         }
-
+        val resultContent = ResultContent(0, 0, 0, records)
+        dataUsageResponse = DataUsageResponse(true, resultContent)
         failedResponse = DataUsageResponse(false, resultContent)
-
         volumeListViewModel = VolumeListViewModel(volumeRepository)
     }
 
