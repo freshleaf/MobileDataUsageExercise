@@ -13,7 +13,7 @@ import com.yuman.anotherexercise.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class VolumeRepository private constructor(application: Application) {
+class VolumeRepository private constructor(application: Application) : IVolumeRepository {
 
     private var application: Application = application
     private val volumeDao: VolumeDao = VolumeDatabase.getInstance(application).volumeDao()
@@ -26,19 +26,19 @@ class VolumeRepository private constructor(application: Application) {
         }
     }
 
-    fun isCardView(): Boolean =
+    override fun isCardView(): Boolean =
         shp.getBoolean(SHP_KEY_IS_CARD_VIEW, false)
 
-    fun storeIsCardView(isCard: Boolean) =
+    override fun storeIsCardView(isCard: Boolean) =
         shp.edit().putBoolean(SHP_KEY_IS_CARD_VIEW, isCard).apply()
 
-    fun isCacheEmptyOrExpired() : Boolean {
+    override fun isCacheEmptyOrExpired(): Boolean {
         val currentTime = System.currentTimeMillis()
         val cacheTime = shp.getLong(SHP_KEY_FETCH_VOLUME_REMOTE_TIME, 0)
         return currentTime - cacheTime > CACHE_EXPIRED_TIME
     }
 
-    suspend fun clearLocalCache() {
+    override suspend fun clearLocalCache() {
         // clear volley cache
         VolleySingleton.getInstance(application).requestQueue.cache.clear()
 
@@ -48,7 +48,7 @@ class VolumeRepository private constructor(application: Application) {
         }
     }
 
-    suspend fun cacheAllVolumes(list: List<QuarterVolumeItem>) {
+    override suspend fun cacheAllVolumes(list: List<QuarterVolumeItem>) {
         shp.edit().putLong(SHP_KEY_FETCH_VOLUME_REMOTE_TIME, System.currentTimeMillis()).apply()
         withContext(Dispatchers.IO) {
             volumeDao.deleteAllVolumes()
@@ -56,13 +56,13 @@ class VolumeRepository private constructor(application: Application) {
         }
     }
 
-    suspend fun getCachedVolumes(): List<QuarterVolumeItem> {
+    override suspend fun getCachedVolumes(): List<QuarterVolumeItem> {
         return withContext(Dispatchers.IO) {
             volumeDao.getAllVolumes()
         }
     }
 
-    fun fetchRemoteVolumes(
+    override fun fetchRemoteVolumes(
         listener: (DataUsageResponse) -> Unit,
         errorListener: (VolleyError) -> Unit
     ) {
