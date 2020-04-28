@@ -44,7 +44,7 @@ class VolumeListFragment : Fragment() {
                 recycleView.adapter = volumeListAdapter
                 volumeListViewModel.isCardView = false
             }
-            volumeListViewModel.storeIsCardView(b)
+            volumeListViewModel.updateIsCardView(b)
         }
         switchMenuItem.actionView.switchCardView.isChecked = volumeListViewModel.isCardView
     }
@@ -55,6 +55,7 @@ class VolumeListFragment : Fragment() {
                 swipeLayout.isRefreshing = true
                 Handler().postDelayed({ volumeListViewModel.resetQuery() }, 1000)
             }
+            R.id.menu_item_clear_cache -> volumeListViewModel.clearLocalCache()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -69,8 +70,8 @@ class VolumeListFragment : Fragment() {
             swipeLayout.isRefreshing = false
         })
         volumeListViewModel.fetchDataUsageResponse.observe(viewLifecycleOwner, Observer {
-            if (it == FetchDataStatus.NETWORK_ERROR) {
-                swipeLayout.isRefreshing = false
+            swipeLayout.isRefreshing = false
+            if (it == FetchDataStatus.NETWORK_ERROR || it == FetchDataStatus.NETWORK_NOT_SUCCESS) {
                 Snackbar.make(
                     requireActivity().volumeListFragmentView,
                     getString(R.string.msg_fetch_data_failed),
@@ -98,7 +99,7 @@ class VolumeListFragment : Fragment() {
         }
 
         swipeLayout.setOnRefreshListener {
-            volumeListViewModel.resetQuery()
+            volumeListViewModel.fetchData()
         }
     }
 

@@ -332,4 +332,136 @@ class YearVolumeItemTest {
         assertThat(yearVolumeList[4]).isEqualTo(resultYear2007)
     }
 
+    @Test
+    fun getYearVolumeItemList_valid() {
+        val year2004Q3 = QuarterVolumeItem(2004, 3, 0.000384f)
+        val year2004Q4 = QuarterVolumeItem(2004, 4, 0.000543f)
+        val year2005Q1 = QuarterVolumeItem(2005, 1, 0.00062f)
+        val year2005Q2 = QuarterVolumeItem(2005, 2, 0.000614f) // dropdown
+        val year2005Q3 = QuarterVolumeItem(2005, 3, 0.000718f)
+        val year2005Q4 = QuarterVolumeItem(2005, 4, 0.000801f)
+        val year2006Q1 = QuarterVolumeItem(2006, 1, 0.00089f)
+        val year2006Q2 = QuarterVolumeItem(2006, 2, 0.001189f)
+        val year2006Q3 = QuarterVolumeItem(2006, 3, 0.001735f)
+        val quarterList = ArrayList<QuarterVolumeItem>().also {
+            it.add(year2004Q3)
+            it.add(year2004Q4)
+            it.add(year2005Q1)
+            it.add(year2005Q2)
+            it.add(year2005Q3)
+            it.add(year2005Q4)
+            it.add(year2006Q1)
+            it.add(year2006Q2)
+            it.add(year2006Q3)
+        }
+        val resultYear2004Q3 = QuarterVolumeItem(2004, 3, 0.000384f)
+        val resultYear2004Q4 = QuarterVolumeItem(2004, 4, 0.000543f)
+        val resultYear2004 = YearVolumeItem(
+            2004,
+            0.000384f + 0.000543f,
+            arrayOf(null, null, resultYear2004Q3, resultYear2004Q4)
+        )
+        val resultYear2005Q1 = QuarterVolumeItem(2005, 1, 0.00062f)
+        val resultYear2005Q2 = QuarterVolumeItem(2005, 2, 0.000614f, true)
+        val resultYear2005Q3 = QuarterVolumeItem(2005, 3, 0.000718f)
+        val resultYear2005Q4 = QuarterVolumeItem(2005, 4, 0.000801f)
+        val resultYear2005 = YearVolumeItem(
+            2005,
+            0.00062f + 0.000614f + 0.000718f + 0.000801f,
+            arrayOf(resultYear2005Q1, resultYear2005Q2, resultYear2005Q3, resultYear2005Q4),
+            true
+        )
+        val resultYear2006Q1 = QuarterVolumeItem(2006, 1, 0.00089f)
+        val resultYear2006Q2 = QuarterVolumeItem(2006, 2, 0.001189f)
+        val resultYear2006Q3 = QuarterVolumeItem(2006, 3, 0.001735f)
+        val resultYear2006 = YearVolumeItem(
+            2006,
+            0.00089f + 0.001189f + 0.001735f,
+            arrayOf(resultYear2006Q1, resultYear2006Q2, resultYear2006Q3, null),
+            false
+        )
+
+        val yearVolumeList = YearVolumeItem.getYearVolumeItemList(quarterList)
+
+        assertThat(yearVolumeList.size).isEqualTo(3)
+        assertThat(yearVolumeList[0]).isEqualTo(resultYear2004)
+        assertThat(yearVolumeList[1]).isEqualTo(resultYear2005)
+        assertThat(yearVolumeList[2]).isEqualTo(resultYear2006)
+    }
+
+    @Test
+    fun getYearVolumeItemList_invalid() {
+        val year2002Q4 = QuarterVolumeItem(2002, 4, 0.000543f)
+        val year2004Q3 = QuarterVolumeItem(2004, 3, 0.000384f)
+        val year2005Q1 = QuarterVolumeItem(2005, 1, 0.0f)
+        val year2005Q2 = QuarterVolumeItem(2005, 2, 0.000614f)
+        val year2005Q3 = QuarterVolumeItem(2005, 3, 0.000718f)
+        val year2005Q4 = QuarterVolumeItem(2005, 4, 0.000801f)
+        val year2006Q1 = QuarterVolumeItem(2006, 1, 0.00079f) // dropdown
+        val year2006Q3 = QuarterVolumeItem(2006, 3, 0.001735f)
+        val year2007Q2 = QuarterVolumeItem(2007, 2, 0.001189f)
+        val yearInvalid = QuarterVolumeItem(2007, 5, 0.001189f) // invalid
+        val quarterList = ArrayList<QuarterVolumeItem>().also {
+            // not in order
+            it.add(year2004Q3)
+            it.add(year2002Q4)
+            it.add(year2005Q3)
+            it.add(year2007Q2)
+            it.add(year2006Q3)
+            it.add(year2006Q1)
+            it.add(year2005Q4)
+            it.add(year2005Q1)
+            it.add(year2005Q2)
+            it.add(year2006Q1) // duplicate
+            it.add(yearInvalid) // invalid
+        }
+        val resultYear2002Q4 = QuarterVolumeItem(2002, 4, 0.000543f)
+        val resultYear2002 = YearVolumeItem(
+            2002,
+            0.000543f,
+            arrayOf(null, null, null, resultYear2002Q4),
+            false
+        )
+        val resultYear2004Q3 = QuarterVolumeItem(2004, 3, 0.000384f)
+        val resultYear2004 = YearVolumeItem(
+            2004,
+            0.000384f,
+            arrayOf(null, null, resultYear2004Q3, null),
+            false
+        )
+        val resultYear2005Q1 = QuarterVolumeItem(2005, 1, 0.0f)
+        val resultYear2005Q2 = QuarterVolumeItem(2005, 2, 0.000614f)
+        val resultYear2005Q3 = QuarterVolumeItem(2005, 3, 0.000718f)
+        val resultYear2005Q4 = QuarterVolumeItem(2005, 4, 0.000801f)
+        val resultYear2005 = YearVolumeItem(
+            2005,
+            0.0f + 0.000614f + 0.000718f + 0.000801f,
+            arrayOf(resultYear2005Q1, resultYear2005Q2, resultYear2005Q3, resultYear2005Q4),
+            false
+        )
+        val resultYear2006Q1 = QuarterVolumeItem(2006, 1, 0.00079f, true) // dropdown
+        val resultYear2006Q3 = QuarterVolumeItem(2006, 3, 0.001735f)
+        val resultYear2006 = YearVolumeItem(
+            2006,
+            0.00079f + 0.001735f,
+            arrayOf(resultYear2006Q1, null, resultYear2006Q3, null),
+            true
+        )
+        val resultYear2007Q2 = QuarterVolumeItem(2007, 2, 0.001189f)
+        val resultYear2007 = YearVolumeItem(
+            2007,
+            0.001189f,
+            arrayOf(null, resultYear2007Q2, null, null),
+            false
+        )
+
+        val yearVolumeList = YearVolumeItem.getYearVolumeItemList(quarterList)
+
+        assertThat(yearVolumeList.size).isEqualTo(5)
+        assertThat(yearVolumeList[0]).isEqualTo(resultYear2002)
+        assertThat(yearVolumeList[1]).isEqualTo(resultYear2004)
+        assertThat(yearVolumeList[2]).isEqualTo(resultYear2005)
+        assertThat(yearVolumeList[3]).isEqualTo(resultYear2006)
+        assertThat(yearVolumeList[4]).isEqualTo(resultYear2007)
+    }
 }

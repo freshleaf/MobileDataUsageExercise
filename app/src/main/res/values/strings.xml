@@ -21,4 +21,5 @@
     <string name="label_short_quarter_4">Q4</string>
     <string name="msg_fetch_data_failed">Fetch failed</string>
     <string name="menuitem_swipe">Swipe to Refresh</string>
+    <string name="menuitem_clear_cache">Clear Cache &amp; Data</string>
 </resources>

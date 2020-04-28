@@ -9,4 +9,7 @@
     <item
         android:id="@+id/menu_item_swipe"
         android:title="@string/menuitem_swipe" />
+    <item
+        android:id="@+id/menu_item_clear_cache"
+        android:title="@string/menuitem_clear_cache" />
 </menu>

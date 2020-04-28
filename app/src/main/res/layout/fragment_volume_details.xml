@@ -70,7 +70,7 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:text="@string/label_quarter_1"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="1.0"
@@ -241,7 +241,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

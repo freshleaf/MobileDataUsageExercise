@@ -17,7 +17,7 @@ data class YearVolumeItem(
 
     companion object {
 
-        fun getYearVolumeItemListFromRaw(quarterContentList: ArrayList<QuarterContent>): ArrayList<YearVolumeItem> {
+        fun getYearVolumeItemListFromRaw(quarterContentList: List<QuarterContent>): ArrayList<YearVolumeItem> {
             val quarterVolumeItemList = ArrayList<QuarterVolumeItem>()
             quarterContentList.forEach {
                 val quarterVolume = QuarterVolumeItem(it)
@@ -26,7 +26,7 @@ data class YearVolumeItem(
             return getYearVolumeItemList(quarterVolumeItemList)
         }
 
-        private fun getYearVolumeItemList(quarterVolumeItemList: ArrayList<QuarterVolumeItem>): ArrayList<YearVolumeItem> {
+        fun getYearVolumeItemList(quarterVolumeItemList: List<QuarterVolumeItem>): ArrayList<YearVolumeItem> {
             val map = HashMap<Int, YearVolumeItem>()
             var minYear = Int.MAX_VALUE
             var maxYear = 0
