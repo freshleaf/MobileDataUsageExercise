@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.yuman.anotherexercise.R
+import com.yuman.anotherexercise.VolumeApplication
 import com.yuman.anotherexercise.data.VolumeRepository
 import com.yuman.anotherexercise.data.local.VolumeDatabase
 import com.yuman.anotherexercise.data.remote.RemoteDataSource
@@ -22,14 +23,7 @@ import kotlinx.android.synthetic.main.switch_item.view.*
  */
 class VolumeListFragment : Fragment() {
     private val volumeListViewModel by viewModels<VolumeListViewModel> {
-        val application = requireActivity().application
-        VolumeViewModelFactory(
-            VolumeRepository(
-                application,
-                VolumeDatabase.getInstance(application).volumeDao(),
-                RemoteDataSource(application)
-            )
-        )
+        VolumeViewModelFactory((requireContext().applicationContext as VolumeApplication).volumeRepository)
     }
 
     private lateinit var switchMenuItem: MenuItem

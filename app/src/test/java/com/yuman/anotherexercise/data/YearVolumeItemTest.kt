@@ -465,4 +465,65 @@ class YearVolumeItemTest {
         assertThat(yearVolumeList[3]).isEqualTo(resultYear2006)
         assertThat(yearVolumeList[4]).isEqualTo(resultYear2007)
     }
+
+    @Test
+    fun equals_true() {
+        val oneQuarter4 = QuarterVolumeItem(2002, 4, 0.000543f)
+        val oneYear = YearVolumeItem(
+            2002,
+            0.000543f,
+            arrayOf(null, null, null, oneQuarter4),
+            false
+        )
+        val otherQuarter4 = QuarterVolumeItem(2002, 4, 0.000543f)
+        val otherYear = YearVolumeItem(
+            2002,
+            0.000543f,
+            arrayOf(null, null, null, otherQuarter4),
+            false
+        )
+
+        assertThat(oneYear).isEqualTo(otherYear)
+    }
+
+    @Test
+    fun equals_false() {
+        val oneQuarter4 = QuarterVolumeItem(2002, 4, 0.000543f)
+        val oneYear = YearVolumeItem(
+            2002,
+            0.000543f,
+            arrayOf(null, null, null, oneQuarter4),
+            false
+        )
+        val otherQuarter4 = QuarterVolumeItem(2002, 4, 0.000543f)
+        val otherYear1 = YearVolumeItem(
+            2003,
+            0.000543f,
+            arrayOf(null, null, null, otherQuarter4),
+            false
+        )
+        val otherYear2 = YearVolumeItem(
+            2002,
+            0.000542f,
+            arrayOf(null, null, null, otherQuarter4),
+            false
+        )
+        val otherYear3 = YearVolumeItem(
+            2002,
+            0.000543f,
+            arrayOf(null, null, null, null),
+            false
+        )
+        val otherYear4 = YearVolumeItem(
+            2002,
+            0.000543f,
+            arrayOf(null, null, null, otherQuarter4),
+            true
+        )
+
+        assertThat(oneYear).isNotEqualTo(otherYear1)
+        assertThat(oneYear).isNotEqualTo(otherYear2)
+        assertThat(oneYear).isNotEqualTo(otherYear3)
+        assertThat(oneYear).isNotEqualTo(otherYear4)
+    }
 }

@@ -1,6 +1,6 @@
 package com.yuman.anotherexercise.data.remote
 
-import android.app.Application
+import android.content.Context
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
@@ -15,9 +15,9 @@ interface IRemoteDataSource {
     )
 }
 
-class RemoteDataSource(application: Application) : IRemoteDataSource {
+class RemoteDataSource(context: Context) : IRemoteDataSource {
 
-    private val application: Application = application
+    private val context: Context = context
 
     private val serverAddress = "https://data.gov.sg/api/action/datastore_search"
     private val mobileDataUsageResourceId = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
@@ -40,10 +40,10 @@ class RemoteDataSource(application: Application) : IRemoteDataSource {
                 errorListener(it)
             }
         )
-        VolleySingleton.getInstance(application).requestQueue.add(stringRequest)
+        VolleySingleton.getInstance(context).requestQueue.add(stringRequest)
     }
 
-    private fun getQueryUrl(
+    fun getQueryUrl(
         resourceId: String,
         parameters: LinkedHashMap<String, String>? = null
     ): String {

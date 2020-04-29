@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.volume_cell_normal.view.*
 import java.text.NumberFormat
 
 class VolumeListAdatper (useCard: Boolean):
-    ListAdapter<YearVolumeItem, VolumeListAdatper.VolumeListViewHolder>(DIFFCALLBACK) {
+    ListAdapter<YearVolumeItem, VolumeListAdatper.VolumeListViewHolder>(DiffCallback) {
 
     private var isCardView: Boolean = useCard
     private val nf = NumberFormat.getInstance().apply {
@@ -101,7 +101,7 @@ class VolumeListAdatper (useCard: Boolean):
         }
     }
 
-    object DIFFCALLBACK : DiffUtil.ItemCallback<YearVolumeItem>() {
+    object DiffCallback : DiffUtil.ItemCallback<YearVolumeItem>() {
         override fun areItemsTheSame(oldItem: YearVolumeItem, newItem: YearVolumeItem): Boolean {
             return oldItem.year == newItem.year
         }

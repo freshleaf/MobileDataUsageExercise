@@ -49,9 +49,9 @@ class VolumeDetailsFragment : Fragment() {
                 tmpVolumeTvList[i].text = "--"
                 tmpIvDrop[i].visibility = View.GONE
             } else {
-                val volumeStr = nf.format(volumeData.quarterItems[i]!!.volume)
+                val volumeStr = nf.format(volumeData.quarterItems[i]?.volume ?: "0")
                 tmpVolumeTvList[i].text = volumeStr
-                if (volumeData.quarterItems[i]!!.isDropdown) {
+                if (volumeData.quarterItems[i]?.isDropdown == true) {
                     tmpIvDrop[i].visibility = View.VISIBLE
                 } else {
                     tmpIvDrop[i].visibility = View.GONE

@@ -102,6 +102,7 @@ data class YearVolumeItem(
 
         if (year != other.year) return false
         if (volume != other.volume) return false
+        if (isDropdown != other.isDropdown) return false
         if (!quarterItems.contentEquals(other.quarterItems)) return false
 
         return true

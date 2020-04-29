@@ -7,9 +7,8 @@ const val SHP_STORE_NAME = "shp_store_name"
 const val SHP_KEY_IS_CARD_VIEW = "key_is_card_view"
 const val SHP_KEY_FETCH_VOLUME_REMOTE_TIME = "key_when_fetched_volume"
 
-// SavedStateHandle key
-const val VOLUME_ITEM_KEY = "YEAR_VOLUME_ITEM_KEY" // argument from list page to detail page
-const val VOLUME_LIST_KEY = "YEAR_VOLUME_LIST_KEY"
+// argument from list page to detail page
+const val VOLUME_ITEM_KEY = "YEAR_VOLUME_ITEM_KEY"
 
 // SQLite database name
 const val DATABASE_NAME = "db_volume"

@@ -12,12 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class VolumeRepository (
-    private val application: Application,
+    private val context: Context,
     private val volumeDao: VolumeDao,
     private val remoteDataSource: IRemoteDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : IVolumeRepository {
-    private val shp = application.getSharedPreferences(SHP_STORE_NAME, Context.MODE_PRIVATE)
+    private val shp = context.getSharedPreferences(SHP_STORE_NAME, Context.MODE_PRIVATE)
 
     override fun isCardView(): Boolean =
         shp.getBoolean(SHP_KEY_IS_CARD_VIEW, false)
@@ -33,7 +33,7 @@ class VolumeRepository (
 
     override suspend fun clearLocalCache() {
         // clear volley cache
-        VolleySingleton.getInstance(application).requestQueue.cache.clear()
+        VolleySingleton.getInstance(context).requestQueue.cache.clear()
 
         shp.edit().putLong(SHP_KEY_FETCH_VOLUME_REMOTE_TIME, 0).apply()
         withContext(ioDispatcher) {
