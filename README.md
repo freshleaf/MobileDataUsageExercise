@@ -21,7 +21,7 @@ It will be two pages app, list and detail screen.
 * Detail page: show one year usage, with the quarter data usage volume
 
 ### structure
-![framework](./doc/framework.jpeg)
+![framework](https://github.com/freshleaf/MobileDataUsageExercise/raw/master/doc/framework.jpeg)
 
 ### source code pacakge
 
