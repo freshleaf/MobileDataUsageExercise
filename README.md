@@ -105,13 +105,22 @@ It will be two pages app, list and detail screen.
 ```
 
 ### Unit Test
-to run test in console  
+1. to run test in console  
 
 ```bash
 ./gradlew testDebugUnitTest --continue
 ./gradlew connectedDebugAndroidTest --continue
 ```
-the report will be in folder: './app/build/reports/tests/'
+the report will be in folder: './app/build/reports/'
+
+2. to get test coverage report
+
+```bash
+./gradlew testDebugUnitTestCoverage
+```
+
+(need the device or emulator is connected)  
+the report will be in folder: './app/build/reports/'
 
 ## NOTE
 When doing instrumentation tests in Android Studio, <strike>it may fail with message below</strike>
