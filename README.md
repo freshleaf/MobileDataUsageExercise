@@ -104,9 +104,17 @@ It will be two pages app, list and detail screen.
         └── styles.xml
 ```
 
+### Unit Test
+to run test in console  
+
+```bash
+./gradlew testDebugUnitTest --continue
+./gradlew connectedDebugAndroidTest --continue
+```
+the report will be in folder: './app/build/reports/tests/'
 
 ## NOTE
-When doing instrumentation tests in Android Studio, it may fail with message below
+When doing instrumentation tests in Android Studio, <strike>it may fail with message below</strike>
 
 ```
 java.lang.UnsupportedOperationException: Failed to create a Robolectric sandbox: Android SDK 29 requires Java 9 (have Java 8)
@@ -114,6 +122,9 @@ java.lang.UnsupportedOperationException: Failed to create a Robolectric sandbox:
 
 one solution is to set runtime JRE environment to Java 9 in Android Studio:  
 Run -> Edit Configurations... -> in popup window, select the Android JUnit test configuration, specify the JRE to new folder
+
+Fixed by changing "targetSdkVersion 29" to "targetSdkVersion 28", it will avoid the problem above.  
+The reason is it will change to use older Robolectric lib, and it will not throw out exception just a warning.  
 
 ## TODO
 * refine build script
