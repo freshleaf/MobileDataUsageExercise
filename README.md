@@ -111,7 +111,7 @@ It will be two pages app, list and detail screen.
 ./gradlew testDebugUnitTest --continue
 ./gradlew connectedDebugAndroidTest --continue
 ```
-the report will be in folder: './app/build/reports/'
+the report will be in folder: `./app/build/reports/`
 
 2. to get test coverage report
 
@@ -120,7 +120,7 @@ the report will be in folder: './app/build/reports/'
 ```
 
 (need the device or emulator is connected)  
-the report will be in folder: './app/build/reports/'
+the report will be in folder: `./app/build/reports/`
 
 ## NOTE
 When doing instrumentation tests in Android Studio, <strike>it may fail with message below</strike>
@@ -136,12 +136,12 @@ Fixed by changing "targetSdkVersion 29" to "targetSdkVersion 28", it will avoid 
 The reason is it will change to use older Robolectric lib, and it will not throw out exception just a warning.  
 
 ## TODO
-* refine build script
-* test coverage report
-* dev ops integration
-* more test: server mock, integration test, monkey test etc
-* play with: paging, viewpage2 etc
-* maybe: i18n, separate landscape view, controller style
+- [x] refine build script
+- [x] test coverage report
+- [ ] dev ops integration
+- [ ] more test: server connection mock, integration test UI check, monkey test etc
+- [ ] play with: paging, viewpage2 etc
+- [ ] maybe: i18n, separate landscape view, controller style
 
 #### what is done
 * coding, the app is functionally workable
