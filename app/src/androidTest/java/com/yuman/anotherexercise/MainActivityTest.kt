@@ -70,7 +70,7 @@ class MainActivityTest {
     fun showDetails() = runBlocking {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
-        Thread.sleep(2000)
+        Thread.sleep(10000)
         onView(withId(R.id.recycleView)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,

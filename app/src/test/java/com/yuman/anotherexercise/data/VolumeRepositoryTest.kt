@@ -122,11 +122,13 @@ class VolumeRepositoryTest {
         var errorListenerCalled = 0
         fun networkCallback(response: DataUsageResponse) {
             listenerCalled += 1
+            assertThat(response.isSuccess).isTrue()
             assertThat(listenerCalled).isEqualTo(1)
         }
         fun networkErrorCallback(error: VolleyError) {
             errorListenerCalled += 1
-            assertThat(errorListenerCalled).isEqualTo(0)
+            assertThat(error).isNotNull()
+            assertThat(errorListenerCalled).isEqualTo(0) // not run
         }
 
         volumeRepository.fetchRemoteVolumes(
@@ -143,10 +145,12 @@ class VolumeRepositoryTest {
         var errorListenerCalled = 0
         fun networkCallback(response: DataUsageResponse) {
             listenerCalled += 1
-            assertThat(listenerCalled).isEqualTo(0)
+            assertThat(response.isSuccess).isTrue()
+            assertThat(listenerCalled).isEqualTo(0) // not run
         }
         fun networkErrorCallback(error: VolleyError) {
             errorListenerCalled += 1
+            assertThat(error).isNotNull()
             assertThat(errorListenerCalled).isEqualTo(1)
         }
 

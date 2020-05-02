@@ -13,21 +13,23 @@ android {
     defaultConfig {
         applicationId "com.yuman.anotherexercise"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 
-        android.defaultConfig.vectorDrawables.useSupportLibrary = true
-        dataBinding {
-            enabled = true
-            enabledForTests = true
-        }
+    android.defaultConfig.vectorDrawables.useSupportLibrary = true
+    dataBinding {
+        enabled = true
+        enabledForTests = true
+    }
 
-        testOptions.unitTests {
-            includeAndroidResources = true
-        }
+    // Always show the result of every unit test when running via command line, even if it passes.
+    testOptions.unitTests {
+        includeAndroidResources = true
+        returnDefaultValues = true
     }
 
     buildTypes {
@@ -52,7 +54,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation "androidx.room:room-runtime:2.2.5"
     kapt "android.arch.persistence.room:compiler:2.2.5"
-    annotationProcessor "androidx.room:room-compiler:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
     implementation "androidx.fragment:fragment-testing:1.2.1"
     implementation "androidx.test:core:1.2.0"
@@ -60,7 +62,11 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     testImplementation "androidx.test.ext:junit-ktx:1.1.1"
     testImplementation "androidx.test:core-ktx:1.2.0"
-    testImplementation "org.robolectric:robolectric:4.3.1"
+    testImplementation ("org.robolectric:robolectric:4.3.1")
+    {
+        // https://github.com/robolectric/robolectric/issues/5245
+        exclude group: 'com.google.auto.service', module: 'auto-service'
+    }
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
     testImplementation "com.google.truth:truth:1.0.1"
     testImplementation "androidx.room:room-testing:2.2.5"
