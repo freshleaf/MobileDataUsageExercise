@@ -3,7 +3,6 @@ package com.yuman.anotherexercise.data.remote
 import android.app.Application
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.volley.VolleyError
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test

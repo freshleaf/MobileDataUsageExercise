@@ -15,9 +15,7 @@ interface IRemoteDataSource {
     )
 }
 
-class RemoteDataSource(context: Context) : IRemoteDataSource {
-
-    private val context: Context = context
+class RemoteDataSource(private val context: Context) : IRemoteDataSource {
 
     private val serverAddress = "https://data.gov.sg/api/action/datastore_search"
     private val mobileDataUsageResourceId = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
@@ -47,7 +45,7 @@ class RemoteDataSource(context: Context) : IRemoteDataSource {
         resourceId: String,
         parameters: LinkedHashMap<String, String>? = null
     ): String {
-        var buff = StringBuffer().append(serverAddress).append('?').append(resourceIdKey)
+        val buff = StringBuffer().append(serverAddress).append('?').append(resourceIdKey)
             .append('=').append(resourceId)
         if (!parameters.isNullOrEmpty()) {
             for (pair in parameters) {

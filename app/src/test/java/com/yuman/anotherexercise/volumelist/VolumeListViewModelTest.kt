@@ -47,7 +47,7 @@ class VolumeListViewModelTest {
         val year2006Q2 = QuarterContent(8, "2006-Q2", 0.001189f)
         val year2006Q3 = QuarterContent(9, "2006-Q3", 0.001735f)
 
-        records = ArrayList<QuarterContent>()
+        records = ArrayList()
         records.let {
             it.add(year2004Q3)
             it.add(year2004Q4)
@@ -207,7 +207,7 @@ class VolumeListViewModelTest {
 
         volumeListViewModel.resetQuery()
         val listValue = volumeListViewModel.volumeList.getOrAwaitValue()
-        var status = volumeListViewModel.fetchDataStatus.getOrAwaitValue()
+        val status = volumeListViewModel.fetchDataStatus.getOrAwaitValue()
         assertThat(status).isEqualTo(FetchDataStatus.FETCHED_FROM_REMOTE)
         assertThat(listValue.size).isEqualTo(3)
         assertThat(listValue[0]).isEqualTo(resultYear2004)

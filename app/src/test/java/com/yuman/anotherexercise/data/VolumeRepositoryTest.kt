@@ -8,9 +8,7 @@ import com.android.volley.VolleyError
 import com.google.common.truth.Truth.assertThat
 import com.yuman.anotherexercise.data.local.FakeRemoteDataSource
 import com.yuman.anotherexercise.data.local.FakeVolumeDao
-import com.yuman.anotherexercise.data.local.VolumeDao
 import com.yuman.anotherexercise.data.remote.DataUsageResponse
-import com.yuman.anotherexercise.data.remote.IRemoteDataSource
 import com.yuman.anotherexercise.data.remote.QuarterContent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

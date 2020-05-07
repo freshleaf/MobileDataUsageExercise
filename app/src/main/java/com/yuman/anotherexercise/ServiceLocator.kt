@@ -8,7 +8,6 @@ import com.yuman.anotherexercise.data.VolumeRepository
 import com.yuman.anotherexercise.data.local.VolumeDatabase
 import com.yuman.anotherexercise.data.remote.RemoteDataSource
 import com.yuman.anotherexercise.util.DATABASE_NAME
-import com.yuman.anotherexercise.util.SHP_STORE_NAME
 
 object ServiceLocator {
 

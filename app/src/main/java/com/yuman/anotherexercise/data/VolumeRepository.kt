@@ -1,6 +1,5 @@
 package com.yuman.anotherexercise.data
 
-import android.app.Application
 import android.content.Context
 import com.android.volley.VolleyError
 import com.yuman.anotherexercise.data.local.VolumeDao
